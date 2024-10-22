@@ -6,21 +6,21 @@ public class Main {
         System.out.println("клас животные");
         anim.run(150);
         System.out.println("количество животных " + Animal.countAmimal);
-        System.out.println("");
+        System.out.println();
 
         System.out.println("клас Собака");
         Dog dog1 = new Dog("Шарик");
         dog1.run(600);
         dog1.swim(50);
         System.out.println("количество собак " + Dog.countDog);
-        System.out.println("");
+        System.out.println();
 
         System.out.println("клас кошки");
         Cat cat1 = new Cat("Барсик", 200);
         cat1.run(300);
         cat1.swim(10);
         System.out.println("количество кошек " + Cat.countCat);
-        System.out.println("");
+        System.out.println();
 
         Cat[] catArray = new Cat[10];
         catArray[0] = new Cat("муся", 8);
@@ -37,9 +37,21 @@ public class Main {
         System.out.println("количество животных " + Animal.countAmimal);
         Dish dish2 = new Dish(45);
 
-        for (int i = 0; i < catArray.length; i++){
-            catArray[i].eating(dish2);
-            System.out.println(catArray[i].name + " сыт: " + catArray[i].full);
+        for (Cat cat : catArray) {
+            cat.eating(dish2);
+            System.out.println(cat.name + " сыт: " + cat.full);
         }
+        System.out.println();
+
+        Triangle tri = new Triangle(3, 4, 5, "Зеленый", "Красный");
+        tri.print();
+        System.out.println();
+
+        Rectangle rectangle = new Rectangle(4, 8, "Синий", "Желтый");
+        rectangle.print();
+        System.out.println();
+
+        Circle circle = new Circle(5,"Белый", "Черный");
+        circle.print();
     }
 }
