@@ -2,7 +2,7 @@ package org.example;
 
 public class Main {
 
-    public static void main(String[] args) throws MyArraySizeException, MyArrayDataException {
+    public static void main(String[] args) {
 
         String[][] array = { { "5", "7", "3", "17" }, { "7", "0", "1", "12" }, { "8", "1", "2", "3" },
                 { "8", "5", "4", "3" } };
