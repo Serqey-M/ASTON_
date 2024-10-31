@@ -1,39 +1,45 @@
 package org.example;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
 
     public static void main(String[] args) {
+            String[] array  = {"Представьте", "себе", "ячейки", "в", "камере", "хранения", "Каждая", "имеет", "свой", "номер", "и", "в", "каждой", "хранится", "какой", "объект", "Багаж",
+                    "Или", "винная", "карта", "в", "которой", "все", "виды", "вина", "пронумерованы", "и", "когда", "вы", "делаете", "заказ", "вам", "достаточно", "назвать", "номер",
+                    "напитка", "Или", "список", "студентов", "группы", "в", "котором", "в", "первой", "ячейке", "будет", "записан", "студент", "Андреев", "а", "в", "последней", "Яковлев",
+                    "Или", "список", "пассажиров", "самолёта", "за", "каждым", "из", "которых", "закреплено", "место", "с", "определённым", "номером", "В", "Java", "чтобы", "работать", "с",
+                    "подобными", "структурами", "то", "есть", "множеством", "однородных", "данных", "часто", "используют",
+                    "массивы", "в", "Java"};
 
-        String[][] array = { { "5", "7", "3", "17" }, { "7", "0", "1", "12" }, { "8", "1", "2", "3" },
-                { "8", "5", "4", "3" } };
-
-        try {
-            System.out.println("Сумма элементов массива равна " + sumArray1(array, 4, 4));
-        } catch (MyArrayDataException | MyArraySizeException e) {
-            System.out.println("Не удалось выполнить расчет");
-            e.printStackTrace();
-        }
-    }
-
-    public static int sumArray1(String[][] array, int numberLines, int numberColumns) throws MyArraySizeException, MyArrayDataException{
-        int sum = 0;
-        if (array.length == numberLines) {
-            for (int i = 0; i < array.length; i++) {
-                if (array[i].length == numberColumns) {
-                    for (int j = 0; j < array[i].length; j++) {
-                        try {
-                            sum += Integer.parseInt(array[i][j]);
-                        } catch (NumberFormatException e) {
-                            throw new MyArrayDataException("Данные в строке " + (i + 1) + " столбце " + (j+1) + " неудалось преобразовать к числовому значению");
-                        }
-                    }
+            Set<String> words = new HashSet<>();
+            Collections.addAll(words, array);
+            System.out.println("1.1 Список уникальных слов");
+            System.out.println(words);
+            HashMap<String, Integer> hm = new HashMap<>();
+            for (String array1 : array) {
+                if (hm.containsKey(array1)) {
+                    hm.replace(array1, hm.get(array1) + 1);
                 } else {
-                    throw new MyArraySizeException("Количество столбцов в " + (i + 1) + " строке не равно " + numberColumns);
+                    hm.put(array1, 1);
                 }
             }
-        } else {
-            throw new MyArraySizeException("Количество строк в массиве не равно " + numberLines);
+            System.out.println();
+            System.out.println("1.2 Подсчет сколько раз встречается каждое слово");
+            System.out.println(hm);
+            System.out.println();
+
+            TelephoneDirectory td1 = new TelephoneDirectory();
+            td1.addPhone("Иванов", "11111111");
+            td1.addPhone("Иванов", "22222222");
+            td1.addPhone("Петров", "33333333");
+            td1.addPhone("Сидоров", "44444444");
+            td1.getPhone("Иванов");
+            td1.getPhone("Петров");
+            td1.getPhone("Сидоров");
+            System.out.println(td1.telephoneDirectory);
         }
-        return sum;
     }
-}
