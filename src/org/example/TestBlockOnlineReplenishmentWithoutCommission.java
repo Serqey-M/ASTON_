@@ -13,41 +13,38 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBlockOnlineReplenishmentWithoutCommission {
     static WebDriver driver = new ChromeDriver();
+    OnlineReplenishmentBlock onlineReplenishmentBlock = new OnlineReplenishmentBlock(driver);
 
     @BeforeAll
     public static void initDriver(){
         driver.get("https://www.mts.by/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement buttonCookie = driver.findElement(By.xpath("/html/body/div[6]/main/div/div[2]/div/div[2]/button[2]"));
-        buttonCookie.click();
+//        WebElement buttonCookie = driver.findElement(By.xpath("/html/body/div[6]/main/div/div[2]/div/div[2]/button[2]"));
+//        buttonCookie.click();
     }
 
     @Test
     public void blockName(){
-        BlockOnlineReplenishmentWithoutCommission blockOnlineReplenishmentWithoutCommission = new BlockOnlineReplenishmentWithoutCommission(driver);
-        Assertions.assertEquals(blockOnlineReplenishmentWithoutCommission.BlockName(), "Онлайн пополнение\nбез комиссии");
+        Assertions.assertEquals(onlineReplenishmentBlock.name(onlineReplenishmentBlock.blockName), "Онлайн пополнение\nбез комиссии");
         }
-//
-//    @Test
-//    public void logoVisa(){
-//        WebElement logoVisa = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[1]/img"));
-//        Assertions.assertTrue(logoVisa.isDisplayed());
-//        Assertions.assertEquals(logoVisa.getAttribute("alt"), "Visa");
-//    }
-//
-//    @Test
-//    public void logoVerifiedByVisa(){
-//        WebElement logoVerifiedByVisa = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[2]/img"));
-//        Assertions.assertTrue(logoVerifiedByVisa.isDisplayed());
-//        Assertions.assertEquals(logoVerifiedByVisa.getAttribute("alt"), "Verified By Visa");
-//    }
-//
-//    @Test
-//    public void logoMasterCard(){
-//        WebElement logoMasterCard = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[3]/img"));
-//        Assertions.assertTrue(logoMasterCard.isDisplayed());
-//        Assertions.assertEquals(logoMasterCard.getAttribute("alt"), "MasterCard");
-//    }
+
+    @Test
+    public void logoVisa(){
+        Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoVisa));
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoVisa, "alt"), "Visa");
+    }
+
+    @Test
+    public void logoVerifiedByVisa(){
+        Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoVerifiedByVisa));
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoVerifiedByVisa, "alt"), "Verified By Visa");
+    }
+
+    @Test
+    public void logoMasterCard(){
+        Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoMasterCard));
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoMasterCard, "alt"), "MasterCard");
+    }
 //
 //    @Test
 //    public void logoMasterCardSecureCode(){

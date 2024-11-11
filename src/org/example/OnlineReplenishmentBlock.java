@@ -2,10 +2,9 @@ package org.example;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-public class BlockOnlineReplenishmentWithoutCommission {
-    static By blockName = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/h2");
+public class OnlineReplenishmentBlock extends Website {
+    By blockName = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/h2");
     By logoVisa = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[1]/img");
     By logoVerifiedByVisa = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[2]/img");
     By logoMasterCard = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[3]/img");
@@ -23,13 +22,8 @@ public class BlockOnlineReplenishmentWithoutCommission {
     By continueButton = By.xpath("//*[@id=\"connection-phone\"]");
     WebDriver driver;
 
-    public BlockOnlineReplenishmentWithoutCommission(WebDriver driver){
-        this.driver = driver;
-    }
 
-    public String BlockName (){
-        WebElement blockName = driver.findElement(BlockOnlineReplenishmentWithoutCommission.blockName);
-        return blockName.getText();
+    public OnlineReplenishmentBlock(WebDriver driver) {
+        super(driver);
     }
-
 }
