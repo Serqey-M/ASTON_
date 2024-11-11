@@ -11,11 +11,15 @@ public class Website {
         this.driver = driver;
     }
 
+    public void openWebsite(String url){
+        driver.get(url);
+    }
+
     public WebElement webElement(By element){
         return driver.findElement(element);
     }
 
-    public String name (By element){
+    public String name(By element){
         return webElement(element).getText();
     }
 
@@ -25,5 +29,13 @@ public class Website {
 
     public String attributeSearch(By element, String nameAttribute){
         return webElement(element).getAttribute(nameAttribute);
+    }
+
+    public void click(By element){
+        webElement(element).click();
+    }
+
+    public String url(){
+        return driver.getCurrentUrl();
     }
 }

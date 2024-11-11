@@ -11,16 +11,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class TestBlockOnlineReplenishmentWithoutCommission {
+public class TestOnlineReplenishmentBlock {
     static WebDriver driver = new ChromeDriver();
-    OnlineReplenishmentBlock onlineReplenishmentBlock = new OnlineReplenishmentBlock(driver);
+    static OnlineReplenishmentBlock onlineReplenishmentBlock = new OnlineReplenishmentBlock(driver);
+    static Cookie cookie = new Cookie(driver);
+    static String url = "https://www.mts.by/";
 
     @BeforeAll
     public static void initDriver(){
-        driver.get("https://www.mts.by/");
+        onlineReplenishmentBlock.openWebsite(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        WebElement buttonCookie = driver.findElement(By.xpath("/html/body/div[6]/main/div/div[2]/div/div[2]/button[2]"));
-//        buttonCookie.click();
+        cookie.click(cookie.buttonCookie);
     }
 
     @Test
@@ -45,28 +46,31 @@ public class TestBlockOnlineReplenishmentWithoutCommission {
         Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoMasterCard));
         Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoMasterCard, "alt"), "MasterCard");
     }
-//
-//    @Test
-//    public void logoMasterCardSecureCode(){
-//        WebElement logoMasterCardSecureCode = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[4]/img"));
-//        Assertions.assertTrue(logoMasterCardSecureCode.isDisplayed());
-//        Assertions.assertEquals(logoMasterCardSecureCode.getAttribute("alt"), "MasterCard Secure Code");
-//    }
-//
-//    @Test
-//    public void logoBelcart(){
-//        WebElement logoBelcart = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[5]/img"));
-//        Assertions.assertTrue(logoBelcart.isDisplayed());
-//        Assertions.assertEquals(logoBelcart.getAttribute("alt"), "Белкарт");
-//    }
-//
-//    @Test
-//    public void linkMoreAboutService() {
-//        WebElement linkMoreAboutService = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/a"));
-//        linkMoreAboutService.click();
-//        Assertions.assertEquals(driver.getCurrentUrl(), "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/");
-//        driver.get("https://www.mts.by/");
-//    }
+
+    @Test
+    public void logoMasterCardSecureCode(){
+        Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoMasterCardSecureCode));
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoMasterCardSecureCode, "alt"), "MasterCard Secure Code");
+
+    }
+
+    @Test
+    public void logoBelcart(){
+        Assertions.assertTrue(onlineReplenishmentBlock.iconDisplay(onlineReplenishmentBlock.logoBelcart));
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.logoBelcart, "alt"), "Белкарт");
+    }
+
+    @Test
+    public void linkMoreAboutService() {
+        onlineReplenishmentBlock.click(onlineReplenishmentBlock.linkMoreAboutService);
+        Assertions.assertEquals(onlineReplenishmentBlock.url(), "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/");
+        onlineReplenishmentBlock.openWebsite(url);
+    }
+
+    @Test
+    public void placeholdersCommunicationServices(){
+
+    }
 //
 //    @Test
 //    public void continueButton(){

@@ -26,4 +26,9 @@ public class OnlineReplenishmentBlock extends Website {
     public OnlineReplenishmentBlock(WebDriver driver) {
         super(driver);
     }
+
+    public void choosingPaymentOption(By element){
+        webElement(paymentOption).click();
+        webElement(element).click();
+    }
 }
