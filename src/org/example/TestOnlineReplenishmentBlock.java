@@ -1,14 +1,8 @@
 package org.example;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TestOnlineReplenishmentBlock {
@@ -19,7 +13,7 @@ public class TestOnlineReplenishmentBlock {
 
     @BeforeAll
     public static void initDriver(){
-        onlineReplenishmentBlock.openWebsite(url);
+        Website.openWebsite(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         cookie.click(cookie.buttonCookie);
     }
@@ -64,30 +58,47 @@ public class TestOnlineReplenishmentBlock {
     public void linkMoreAboutService() {
         onlineReplenishmentBlock.click(onlineReplenishmentBlock.linkMoreAboutService);
         Assertions.assertEquals(onlineReplenishmentBlock.url(), "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/");
-        onlineReplenishmentBlock.openWebsite(url);
+        Website.openWebsite(url);
     }
 
     @Test
     public void placeholdersCommunicationServices(){
+        onlineReplenishmentBlock.choosingPaymentOption(onlineReplenishmentBlock.communicationServices);
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.phoneNumberField, "placeholder"),"Номер телефона");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.amountCommunicationServicesField, "placeholder"),"Сумма");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.emailCommunicationServicesField, "placeholder"),"E-mail для отправки чека");
+    }
+
+    @Test
+    public void placeholdersHomeInternet(){
+        onlineReplenishmentBlock.choosingPaymentOption(onlineReplenishmentBlock.homeInternet);
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.subscriberNumberField, "placeholder"),"Номер абонента");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.amountHomeInternetField, "placeholder"),"Сумма");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.emailHomeInternetField, "placeholder"),"E-mail для отправки чека");
+    }
+
+    @Test
+    public void placeholdersInstalment(){
+        onlineReplenishmentBlock.choosingPaymentOption(onlineReplenishmentBlock.instalment);
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.accountNumberFor44, "placeholder"),"Номер счета на 44");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.amountInstalmentField, "placeholder"),"Сумма");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.emailInstalmentField, "placeholder"),"E-mail для отправки чека");
+    }
+
+    @Test
+    public void placeholdersArrears(){
+        onlineReplenishmentBlock.choosingPaymentOption(onlineReplenishmentBlock.arrears);
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.accountNumberFor2073, "placeholder"),"Номер счета на 2073");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.amountArrearsField, "placeholder"),"Сумма");
+        Assertions.assertEquals(onlineReplenishmentBlock.attributeSearch(onlineReplenishmentBlock.emailArrearsField, "placeholder"),"E-mail для отправки чека");
+    }
+
+    @Test
+    public void switchToPayConnection(){
+        Assertions.assertInstanceOf(PayConnection.class, onlineReplenishmentBlock.payConnection("297777777", "10"));
 
     }
-//
-//    @Test
-//    public void continueButton(){
-//        WebElement phoneNumberField = driver.findElement(By.xpath("//*[@id=\"connection-phone\"]"));
-//        phoneNumberField.sendKeys("297777777");
-//        WebElement amountField = driver.findElement(By.xpath("//*[@id=\"connection-sum\"]"));
-//        amountField.sendKeys("10");
-//        WebElement continueButton = driver.findElement(By.xpath("//*[@id=\"pay-connection\"]/button"));
-//        continueButton.click();
-//        WebElement bepaidIframe = driver.findElement(By.xpath("/html/body/div[8]/div/iframe"));
-//        driver.switchTo().frame(bepaidIframe);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/span[1]"))));
-//        WebElement text = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/span[1]"));
-//        Assertions.assertEquals(text.getText(), "10.00 BYN");
-//        driver.get("https://www.mts.by/");
-//    }
-//
+
     @AfterAll
     public static void closeDriver(){
         driver.quit();

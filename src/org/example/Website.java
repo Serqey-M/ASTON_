@@ -5,13 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Website {
-    WebDriver driver;
+    static WebDriver driver;
 
     public Website(WebDriver driver){
-        this.driver = driver;
+        Website.driver = driver;
     }
 
-    public void openWebsite(String url){
+    public static void openWebsite(String url){
         driver.get(url);
     }
 
@@ -37,5 +37,9 @@ public class Website {
 
     public String url(){
         return driver.getCurrentUrl();
+    }
+
+    public void fillingInField(By element, String data){
+        webElement(element).sendKeys(data);
     }
 }

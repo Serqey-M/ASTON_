@@ -17,10 +17,20 @@ public class OnlineReplenishmentBlock extends Website {
     By instalment = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[1]/div[1]/div[2]/ul/li[3]/p");
     By arrears = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[1]/div[1]/div[2]/ul/li[4]/p");
     By phoneNumberField = By.xpath("//*[@id=\"connection-phone\"]");
-    By amountField = By.xpath("//*[@id=\"connection-sum\"]");
-    By emailField = By.xpath("//*[@id=\"connection-email\"]");
-    By continueButton = By.xpath("//*[@id=\"connection-phone\"]");
-    WebDriver driver;
+    By subscriberNumberField = By.xpath("//*[@id=\"internet-phone\"]");
+    By accountNumberFor44 = By.xpath("//*[@id=\"score-instalment\"]");
+    By accountNumberFor2073 = By.xpath("//*[@id=\"score-arrears\"]");
+    By amountCommunicationServicesField = By.xpath("//*[@id=\"connection-sum\"]");
+    By amountHomeInternetField = By.xpath("//*[@id=\"internet-sum\"]");
+    By amountInstalmentField = By.xpath("//*[@id=\"instalment-sum\"]");
+    By amountArrearsField = By.xpath("//*[@id=\"arrears-sum\"]");
+    By emailCommunicationServicesField = By.xpath("//*[@id=\"connection-email\"]");
+    By emailHomeInternetField = By.xpath("//*[@id=\"internet-email\"]");
+    By emailInstalmentField = By.xpath("//*[@id=\"instalment-email\"]");
+    By emailArrearsField = By.xpath("//*[@id=\"arrears-email\"]");
+    By buttonPayConnection = By.xpath("//*[@id=\"pay-connection\"]/button");
+
+
 
 
     public OnlineReplenishmentBlock(WebDriver driver) {
@@ -30,5 +40,8 @@ public class OnlineReplenishmentBlock extends Website {
     public void choosingPaymentOption(By element){
         webElement(paymentOption).click();
         webElement(element).click();
+    }
+    public PayConnection payConnection (String phoneNumber, String amount){
+        return new PayConnection(driver, phoneNumber, amount);
     }
 }
