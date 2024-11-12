@@ -6,14 +6,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.DecimalFormat;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static java.lang.Double.parseDouble;
 
 public class TestPayConnection {
     static String phoneNumber = "297777777";
-    static String amount = "10.05";
+    static String amount = "10";
     static WebDriver driver = new ChromeDriver();
     static PayConnection payConnection = new PayConnection(driver, phoneNumber, amount);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    DecimalFormat decimalFormat = new DecimalFormat("#.00#");
 
     @BeforeAll
     public static void initDriver() {
@@ -27,12 +35,12 @@ public class TestPayConnection {
 
     @Test
     public void headingAmount(){
-        Assertions.assertEquals(payConnection.name(payConnection.headingAmount), amount + " BYN");
+        Assertions.assertEquals(payConnection.name(payConnection.headingAmount), String.format("%.2f", Float.parseFloat(amount)).replace(",",".") + " BYN");
     }
 
     @Test
     public void nameButton(){
-        Assertions.assertEquals(payConnection.name(payConnection.button), "Оплатить " + amount + " BYN");
+        Assertions.assertEquals(payConnection.name(payConnection.button), "Оплатить " + String.format("%.2f", Float.parseFloat(amount)).replace(",",".") + " BYN");
     }
 
     @Test
@@ -65,7 +73,27 @@ public class TestPayConnection {
         Assertions.assertTrue(payConnection.iconDisplay(payConnection.logoVisa));
     }
 
+    @Test
+    public void logoMasterCard(){
+        Assertions.assertTrue(payConnection.iconDisplay(payConnection.logoMasterCard));
+    }
 
+    @Test
+    public void logoBelcart(){
+        Assertions.assertTrue(payConnection.iconDisplay(payConnection.logoBelcart));
+    }
+
+    @Test
+    public void logo() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(payConnection.logoMaestro));
+        Assertions.assertTrue(payConnection.iconDisplay(payConnection.logoMaestro));
+    }
+
+    @Test
+    public void logoMir(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(payConnection.logoMir));
+        Assertions.assertTrue(payConnection.iconDisplay(payConnection.logoMir));
+    }
 
     @AfterAll
     public static void closeDriver(){

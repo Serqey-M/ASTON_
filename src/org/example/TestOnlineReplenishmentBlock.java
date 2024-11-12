@@ -8,14 +8,14 @@ import java.util.concurrent.TimeUnit;
 public class TestOnlineReplenishmentBlock {
     static WebDriver driver = new ChromeDriver();
     static OnlineReplenishmentBlock onlineReplenishmentBlock = new OnlineReplenishmentBlock(driver);
-    static Cookie cookie = new Cookie(driver);
+//    static Cookie cookie = new Cookie(driver);
     static String url = "https://www.mts.by/";
 
     @BeforeAll
     public static void initDriver(){
         Website.openWebsite(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        cookie.click(cookie.buttonCookie);
+//        cookie.click(cookie.buttonCookie);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TestOnlineReplenishmentBlock {
     @Test
     public void switchToPayConnection(){
         Assertions.assertInstanceOf(PayConnection.class, onlineReplenishmentBlock.payConnection("297777777", "10"));
-
+        Website.openWebsite(url);
     }
 
     @AfterAll

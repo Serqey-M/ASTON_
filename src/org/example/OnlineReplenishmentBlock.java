@@ -1,9 +1,11 @@
 package org.example;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class OnlineReplenishmentBlock extends Website {
+    String url = "https://www.mts.by/";
     By blockName = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/h2");
     By logoVisa = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[1]/img");
     By logoVerifiedByVisa = By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/div[2]/ul/li[2]/img");
@@ -35,6 +37,14 @@ public class OnlineReplenishmentBlock extends Website {
 
     public OnlineReplenishmentBlock(WebDriver driver) {
         super(driver);
+        OnlineReplenishmentBlock.openWebsite(url);
+        Cookie cookie = new Cookie(driver);
+        try {
+            cookie.click(cookie.buttonCookie);
+        }
+        catch (NoSuchElementException ignored){
+        }
+
     }
 
     public void choosingPaymentOption(By element){
