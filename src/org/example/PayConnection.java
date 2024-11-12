@@ -32,9 +32,6 @@ public class PayConnection extends Website{
         this.amount = amount;
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        OnlineReplenishmentBlock.openWebsite(url);
-//        Cookie cookie = new Cookie(driver);
-//        cookie.click(cookie.buttonCookie);
         OnlineReplenishmentBlock onlineReplenishmentBlock = new OnlineReplenishmentBlock(driver);
         onlineReplenishmentBlock.choosingPaymentOption(onlineReplenishmentBlock.communicationServices);
         onlineReplenishmentBlock.fillingInField(onlineReplenishmentBlock.phoneNumberField,phoneNumber);

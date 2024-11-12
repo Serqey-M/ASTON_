@@ -8,12 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-
-import static java.lang.Double.parseDouble;
 
 public class TestPayConnection {
     static String phoneNumber = "297777777";
@@ -21,7 +17,7 @@ public class TestPayConnection {
     static WebDriver driver = new ChromeDriver();
     static PayConnection payConnection = new PayConnection(driver, phoneNumber, amount);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    DecimalFormat decimalFormat = new DecimalFormat("#.00#");
+
 
     @BeforeAll
     public static void initDriver() {
