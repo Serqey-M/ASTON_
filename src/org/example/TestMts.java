@@ -1,8 +1,8 @@
 package org.example;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,16 +19,20 @@ public class TestMts {
     @BeforeAll
     public static void initDriver(){
         driver.get("https://www.mts.by/");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement buttonCookie = driver.findElement(By.xpath("/html/body/div[6]/main/div/div[2]/div/div[2]/button[2]"));
-        buttonCookie.click();
+        try {
+            buttonCookie.click();
+        }
+        catch (ElementNotInteractableException ignored){
+        }
     }
 
     @Test
     public void blockName(){
         WebElement blockName = driver.findElement(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/h2"));
         Assertions.assertEquals(blockName.getText(), "Онлайн пополнение\nбез комиссии");
-        }
+    }
 
     @Test
     public void logoVisa(){
@@ -94,5 +98,3 @@ public class TestMts {
         driver.quit();
     }
 }
-
-
