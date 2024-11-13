@@ -20,7 +20,6 @@ public class TestF {
         Assertions.assertEquals(factorial(a), b);
     }
 
-
     @ParameterizedTest
     @CsvSource({"-1,-1","-5,-1"})
     public void testF1(int a, int b){
@@ -28,7 +27,6 @@ public class TestF {
         Assertions.assertEquals(factorial(a), b);
         Assertions.assertEquals("Невозможно посчитать факториал отрицательного числа", outputStreamCaptor.toString().trim());
         }
-
 }
 
 
