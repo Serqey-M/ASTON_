@@ -9,8 +9,6 @@ import java.io.PrintStream;
 
 import static org.example.Main.factorial;
 
-
-
 public class TestF {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
