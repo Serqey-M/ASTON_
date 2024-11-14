@@ -1,5 +1,8 @@
-package org.example;
+package org.example.tests;
 
+import org.example.pages.OnlineReplenishmentBlock;
+import org.example.pages.PayConnection;
+import org.example.pages.Website;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

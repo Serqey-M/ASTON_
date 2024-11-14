@@ -1,5 +1,6 @@
-package org.example;
+package org.example.tests;
 
+import org.example.pages.PayConnection;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
